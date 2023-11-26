@@ -1,36 +1,31 @@
-package com.mathincrash.vehicle;
+package com.mathincrash.onroad;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import com.mathincrash.ui.Drawable;
 import com.mathincrash.ui.GamePanel;
 
-public class Vehicle implements Drawable{
+public class Vehicle extends Crashable implements Drawable{
 	public static final int LEFT = 1;
 	public static final int MID = 2;
 	public static final int RIGHT = 3;
-	private int x, y, rad;
 	private int position;
 	
 	public Vehicle(GamePanel gp) {
+		super((gp.maxTileCol-1)/2* gp.tileSize, (gp.maxTileRow-1)*gp.tileSize, gp.tileSize, gp.tileSize);
 		this.position = MID;
-		this.x = (gp.maxTileCol-1)/2* gp.tileSize;
-		this.y = (gp.maxTileRow-1)*gp.tileSize;
-		this.rad = gp.tileSize;
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(new Color(0,0,0));
-		g.fillOval(x, y, rad, rad);
+		g.drawRect(x, y, width, height);
 	}
 	
 	public void goLeft(GamePanel gp) {
