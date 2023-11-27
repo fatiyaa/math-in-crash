@@ -44,7 +44,6 @@ public class GamePanel extends JPanel implements Runnable{
     public UI ui;
     
 	public Point point;
-	
 	public Map map;
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
@@ -120,14 +119,16 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
     public void update() {
-		this.map.update();
-
-    	if (gameState != playState) this.ui.update();
+		
+		if (gameState != playState){
+			this.ui.update();
+		}
     	else if(gameState == mathState) {
-    		ui.update();
+			ui.update();
     	}
     	else if (gameState == playState){
-    		vehicle.update();
+			this.map.update();
+    		this.vehicle.update();
 	    	boolean p = false;
 	    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
 	    		Obstacle obstacle = i.next();
