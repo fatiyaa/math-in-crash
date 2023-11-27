@@ -140,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable{
 				}
 			}
 	    	if (p) makeObstacle(random.nextInt(1,11));
-	    	System.out.println(obstacles.size());
+//	    	System.out.println(obstacles.size());
 	    	timer.start();
     	}
     }

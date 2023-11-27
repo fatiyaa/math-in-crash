@@ -80,13 +80,11 @@ public class MathState extends State {
 		                	if (cor.status) {
 			                	cor.val = col.val;
 			                	this.toBeAddToLeft.add(cor);
-//			                	leftSide.add(cor);
 			                	toBeRemovedFromRight.add(cor);
 			                	break;
 		                	}else if (col.status) {
 		                        col.val = cor.val;
 		                        this.toBeAddToRight.add(col);
-//		                        rightSide.add(col);
 		                        toBeRemovedFromLeft.add(col);
 		                        break;
 		                    }
