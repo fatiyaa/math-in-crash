@@ -11,14 +11,21 @@ public class Vehicle extends Crashable implements Drawable{
 	public static final int MID = 2;
 	public static final int RIGHT = 3;
 	private int position;
+	private GamePanel gp;
 	
 	public Vehicle(GamePanel gp) {
 		super((gp.maxTileCol-1)/2* gp.tileSize, (gp.maxTileRow-1)*gp.tileSize, gp.tileSize, gp.tileSize);
+		this.gp = gp;
 		this.position = MID;
 	}
 
 	@Override
 	public void update() {
+		for(Obstacle ob : gp.obstacles) {
+			if(this.crashed(ob)) {
+				gp.gameState = GamePanel.mathState;
+			}
+		}
 		
 	}
 

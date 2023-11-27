@@ -19,18 +19,18 @@ public class KeyHandler implements KeyListener {
         switch (key) {
 	        case KeyEvent.VK_RIGHT:
 	        case KeyEvent.VK_D: {
-//	            if (gp.gameState == GamePanel.playState) {
+	            if (gp.gameState == GamePanel.playState) {
 	        	System.out.println("right");
 		        gp.vehicle.goRight(gp);
-//	            }
+	            }
 	            break;
 	        }
 	        case KeyEvent.VK_LEFT: 
 	        case KeyEvent.VK_A: {
-//	            if (gp.gameState == GamePanel.playState) {
+	            if (gp.gameState == GamePanel.playState) {
 	        	System.out.println("left");
 		        gp.vehicle.goLeft(gp);
-//	            }
+	            }
 	            break;
 	        }
 //	        case KeyEvent.VK_ESCAPE: {

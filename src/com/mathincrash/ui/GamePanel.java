@@ -3,14 +3,18 @@ package com.mathincrash.ui;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import com.mathincrash.onroad.Obstacle;
 import com.mathincrash.onroad.Vehicle;
+import com.mathincrash.util.Point;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -21,6 +25,13 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxTileCol = 7;
 	public final int refreshRate = 120;
 	
+	public final int maxState = 5;
+    public static final int titleState = 0;
+    public static final int playState = 1;
+    public static final int pauseState = 2;
+    public static final int endState = 3;
+    public static final int mathState = 4;
+	
 	public final int screenWidth = maxTileCol*tileSize;
 	public final int screenHeight = maxTileRow*tileSize;
 	private Random random;
@@ -28,30 +39,44 @@ public class GamePanel extends JPanel implements Runnable{
 	public Thread thread;
 	public KeyHandler keyH;
     public MouseHandler mouseH;
-	
+    public int gameState;
+    public UI ui;
+    
+	public Point point;
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
 	
+	Timer timer = new Timer(1000, new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			point.update();
+		}
+	});
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.vehicle = new Vehicle(this);
 		this.obstacles = new ArrayList<Obstacle>();
+		this.point = new Point(this);
 		this.random = new Random();
 		makeObstacle(1);
 		this.keyH = new KeyHandler(this);
+		this.mouseH = new MouseHandler(this);
 		this.addKeyListener(keyH);
+		this.addMouseListener(mouseH);
+        this.addMouseMotionListener(mouseH);
 		this.setFocusable(true);
+		this.ui = new UI(this);
+		
+		this.gameState = playState;
 	}
 	
 	public void makeObstacle(int n) {
 		if(obstacles.isEmpty()) {
-			Obstacle ob = new Obstacle(this);
-//			System.out.println("added");
-			obstacles.add(ob);
+			obstacles.add(new Obstacle(this));
 		}
 		while(obstacles.size() < n) {
-			Obstacle ob = new Obstacle(this, -tileSize);
+			Obstacle ob = new Obstacle(this, random.nextInt(-5,0)*tileSize*5);
 			boolean crash = false;
 			for(Obstacle obstacle : obstacles) {
 				if(ob.crashed(obstacle))crash = true;
@@ -91,29 +116,45 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
     public void update() {
-    	boolean p = false;
-    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
-    		Obstacle obstacle = i.next();
-    		obstacle.update();
-			if(!obstacle.onScreen()) {
-				i.remove();
+    	if (gameState != playState) this.ui.update();
+    	else if(gameState == mathState) {
+    		ui.update();
+    	}
+    	else if (gameState == playState){
+    		vehicle.update();
+	    	boolean p = false;
+	    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
+	    		Obstacle obstacle = i.next();
+	    		obstacle.update();
+				if(!obstacle.onScreen()) {
+					i.remove();
+				}
+				else {
+					p = true;
+				}
 			}
-			else {
-				p = true;
-			}
-		}
-    	if (p) makeObstacle(random.nextInt(1,3));
-    	System.out.println(obstacles.size());
+	    	if (p) makeObstacle(random.nextInt(1,11));
+	    	System.out.println(obstacles.size());
+	    	timer.start();
+    	}
     }
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		this.update();
-		for(Obstacle obstacle : obstacles) {
-			obstacle.draw(g);
+		if (gameState == titleState) ui.draw(g);
+		else if(gameState == mathState) {
+//			System.out.println("math");
+			ui.draw(g);
 		}
-		Graphics2D g2d = (Graphics2D) g;
-		this.vehicle.draw(g2d);
+		else {
+			for(Obstacle obstacle : obstacles) {
+				obstacle.draw(g);
+			}
+			Graphics2D g2d = (Graphics2D) g;
+			this.vehicle.draw(g2d);
+			this.point.draw(g);
+		}
 	}
 	
 	

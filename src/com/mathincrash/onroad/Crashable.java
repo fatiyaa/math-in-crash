@@ -1,8 +1,8 @@
 package com.mathincrash.onroad;
 
 public class Crashable {
-	protected int x,y;
-	protected int width, height;
+	public int x,y;
+	public int width, height;
 	
 	public Crashable(int x, int y, int width, int height) {
 		this.x = x;
@@ -12,7 +12,7 @@ public class Crashable {
 	}
 	
 	public boolean crashed(Crashable crash) {
-		System.out.println("crashed");
+//		System.out.println("crashed");
 		return (x+width > crash.x && y+height > crash.y && crash.x+crash.width > x && crash.y+crash.height > y);
 	}
 }

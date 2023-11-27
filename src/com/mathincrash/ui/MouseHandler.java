@@ -10,14 +10,15 @@ public class MouseHandler implements MouseListener, MouseMotionListener{
 	GamePanel gp;
 	
 	public int mouseX, mouseY;
-	public boolean mousePressed, mouseReleased;
+	public boolean mousePressed, mouseReleased, mouseDragged;
 	
 	public MouseHandler(GamePanel gp) {
         this.gp = gp;
         this.mousePressed = false;
         this.mouseReleased = true;
+        this.mouseDragged = false;
 	}
-
+	
 	@Override
     public void mousePressed(MouseEvent e) {
         this.mouseX = e.getX();
@@ -44,6 +45,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener{
     public void mouseDragged(MouseEvent e) {
         this.mouseX = e.getX();
         this.mouseY = e.getY();
+        this.mouseDragged = true;
     }
 
     @Override
