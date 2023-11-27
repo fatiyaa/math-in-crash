@@ -40,15 +40,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public Thread thread;
 	public KeyHandler keyH;
     public MouseHandler mouseH;
-<<<<<<< Updated upstream
     public int gameState;
     public UI ui;
     
 	public Point point;
-=======
 	
 	public Map map;
->>>>>>> Stashed changes
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
 	
@@ -123,7 +120,8 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
     public void update() {
-<<<<<<< Updated upstream
+		this.map.update();
+
     	if (gameState != playState) this.ui.update();
     	else if(gameState == mathState) {
     		ui.update();
@@ -140,15 +138,6 @@ public class GamePanel extends JPanel implements Runnable{
 				else {
 					p = true;
 				}
-=======
-		this.map.update();
-    	boolean p = false;
-    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
-    		Obstacle obstacle = i.next();
-    		obstacle.update();
-			if(!obstacle.onScreen()) {
-				i.remove();
->>>>>>> Stashed changes
 			}
 	    	if (p) makeObstacle(random.nextInt(1,11));
 	    	System.out.println(obstacles.size());
@@ -158,7 +147,8 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-<<<<<<< Updated upstream
+		this.map.draw(g);
+
 		this.update();
 		if (gameState == titleState) ui.draw(g);
 		else if(gameState == mathState) {
@@ -173,15 +163,6 @@ public class GamePanel extends JPanel implements Runnable{
 			this.vehicle.draw(g2d);
 			this.point.draw(g);
 		}
-=======
-		this.map.draw(g);
-		for(Obstacle obstacle : obstacles) {
-			obstacle.draw(g);
-		}
-		Graphics2D g2d = (Graphics2D) g;
-		this.vehicle.draw(g2d);
-		this.update();
->>>>>>> Stashed changes
 	}
 	
 	
