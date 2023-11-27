@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.mathincrash.map.Map;
 import com.mathincrash.onroad.Obstacle;
 import com.mathincrash.onroad.Vehicle;
 import com.mathincrash.util.Point;
@@ -39,10 +40,15 @@ public class GamePanel extends JPanel implements Runnable{
 	public Thread thread;
 	public KeyHandler keyH;
     public MouseHandler mouseH;
+<<<<<<< Updated upstream
     public int gameState;
     public UI ui;
     
 	public Point point;
+=======
+	
+	public Map map;
+>>>>>>> Stashed changes
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
 	
@@ -56,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.vehicle = new Vehicle(this);
+		this.map = new Map(this);
 		this.obstacles = new ArrayList<Obstacle>();
 		this.point = new Point(this);
 		this.random = new Random();
@@ -116,6 +123,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
     public void update() {
+<<<<<<< Updated upstream
     	if (gameState != playState) this.ui.update();
     	else if(gameState == mathState) {
     		ui.update();
@@ -132,6 +140,15 @@ public class GamePanel extends JPanel implements Runnable{
 				else {
 					p = true;
 				}
+=======
+		this.map.update();
+    	boolean p = false;
+    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
+    		Obstacle obstacle = i.next();
+    		obstacle.update();
+			if(!obstacle.onScreen()) {
+				i.remove();
+>>>>>>> Stashed changes
 			}
 	    	if (p) makeObstacle(random.nextInt(1,11));
 	    	System.out.println(obstacles.size());
@@ -141,6 +158,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+<<<<<<< Updated upstream
 		this.update();
 		if (gameState == titleState) ui.draw(g);
 		else if(gameState == mathState) {
@@ -155,6 +173,15 @@ public class GamePanel extends JPanel implements Runnable{
 			this.vehicle.draw(g2d);
 			this.point.draw(g);
 		}
+=======
+		this.map.draw(g);
+		for(Obstacle obstacle : obstacles) {
+			obstacle.draw(g);
+		}
+		Graphics2D g2d = (Graphics2D) g;
+		this.vehicle.draw(g2d);
+		this.update();
+>>>>>>> Stashed changes
 	}
 	
 	
