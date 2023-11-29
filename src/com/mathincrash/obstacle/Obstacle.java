@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.mathincrash.ui.Drawable;
 import com.mathincrash.ui.GamePanel;
-import com.mathincrash.vehicle.Vehicle;
+import com.mathincrash.onroad.Vehicle;
 
 public class Obstacle implements Drawable{
 	public static final int LEFT = 1;

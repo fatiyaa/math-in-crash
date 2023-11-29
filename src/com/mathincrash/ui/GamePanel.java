@@ -143,13 +143,13 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
     public void update() {
-		this.map.update();
 
     	if (gameState != playState) this.ui.update();
     	else if(gameState == mathState) {
     		ui.update();
     	}
     	else if (gameState == playState){
+    		this.map.update();
     		vehicle.update();
 	    	boolean p = false;
 	    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
