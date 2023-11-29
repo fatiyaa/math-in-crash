@@ -12,7 +12,7 @@ public class Operator implements Drawable{
 	private Random rand;
 	private int x, y, width, height;
 	private int xDraw, yDraw;
-	private boolean operator;
+	public boolean operator;
 	public String stringOperator;
 	private Font font;
 	
@@ -22,10 +22,8 @@ public class Operator implements Drawable{
 		x = 3*gp.tileSize;
 		y = 2*gp.tileSize + gp.tileSize/2;
 		rand = new Random();
-		operator = rand.nextBoolean();
-		if(operator == true) stringOperator = "+";
-		else stringOperator = "-";
 		font = new Font(null, Font.PLAIN, 100);
+		generate();
 	}
 	
 	@Override
@@ -41,6 +39,12 @@ public class Operator implements Drawable{
 		xDraw = x + (width - g.getFontMetrics().stringWidth(stringOperator))/2;
 		yDraw = y + (height/2 - g.getFontMetrics().getHeight()/2 + g.getFontMetrics().getAscent());
 		g.drawString(stringOperator, xDraw, yDraw);
+	}
+	
+	public void generate() {
+		operator = rand.nextBoolean();
+		if(operator == true) stringOperator = "+";
+		else stringOperator = "-";
 	}
 	
 

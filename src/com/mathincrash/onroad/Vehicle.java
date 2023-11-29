@@ -3,6 +3,7 @@ package com.mathincrash.onroad;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import com.mathincrash.state.MathState;
 import com.mathincrash.ui.Drawable;
 import com.mathincrash.ui.GamePanel;
 import com.mathincrash.util.MakeImage;
@@ -29,6 +30,8 @@ public class Vehicle extends Crashable implements Drawable{
 		for(Obstacle ob : gp.obstacles) {
 			if(this.crashed(ob)) {
 				gp.gameState = GamePanel.mathState;
+				MathState inp = (MathState) gp.ui.states[GamePanel.mathState];
+				inp.reset();
 			}
 		}
 		

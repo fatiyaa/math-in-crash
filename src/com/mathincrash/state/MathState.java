@@ -8,8 +8,13 @@ import java.util.Random;
 import com.mathincrash.math.CountObject;
 import com.mathincrash.math.CountValue;
 import com.mathincrash.math.Operator;
+import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
+<<<<<<< HEAD
 import com.mathincrash.util.MakeImage;
+=======
+import com.mathincrash.ui.InputField;
+>>>>>>> 26f47b2 (add input math)
 
 public class MathState extends State{
 	private ArrayList <CountObject> leftSide, rightSide, 
@@ -19,7 +24,13 @@ public class MathState extends State{
 	private int side = gp.tileSize;
 	private Random rand;
 	private Operator operator;
+<<<<<<< HEAD
 	private Image background;
+=======
+	private Button button;
+	public InputField input;
+	private int answer;
+>>>>>>> 26f47b2 (add input math)
 	
 	public MathState(GamePanel gp) {
 		super(gp);
@@ -41,6 +52,7 @@ public class MathState extends State{
 		rightSide = setList(rightValue);
 		side += 3*gp.tileSize;
 		operator = new Operator(gp);
+		evaluate();
 		
 		String imagePath = "assets/math/Board.png";
 		this.background = new MakeImage(imagePath, gp.tileSize*5, gp.tileSize*6).getImage();
@@ -55,7 +67,7 @@ public class MathState extends State{
 		int n = rand.nextInt(1,21);
 		ArrayList<CountObject> list = new ArrayList<CountObject>();
 		if(list.isEmpty()) {
-			list.add(new CountObject(gp, side+10, 2*gp.tileSize, value));
+			list.add(new CountObject(gp, side+10, 2*gp.tileSize-10, value));
 		}
 		for(int i = 0; i<n; i++) {
 			int xco = rand.nextInt(side+10, side+2*gp.tileSize-30);
@@ -70,6 +82,14 @@ public class MathState extends State{
 			}
 		}
 		return list;
+	}
+	
+	private void evaluate() {
+		if(operator.operator == true) {
+			answer = (this.leftSide.size()*this.leftValue) + (this.rightSide.size()*this.rightValue);
+		} else {
+			answer = (this.leftSide.size()*this.leftValue) - (this.rightSide.size()*this.rightValue);
+		}
 	}
 	
 	public void crashingCase() {
@@ -148,7 +168,18 @@ public class MathState extends State{
 	public void update() {
 		leftEval.setValue(leftValue*leftSide.size());
 		rightEval.setValue(rightValue*rightSide.size());
+//		input.update();
 		crashingCase();
+		if(button.state == Button.submitted) {
+			if(input.getAnswer()==this.answer) {
+				gp.gameState = GamePanel.playState;
+				gp.resetContinue(50);
+			}
+			else {
+				gp.gameState = GamePanel.endState;
+			}
+		}
+		button.update();
 	}
 
 	@Override
@@ -163,7 +194,29 @@ public class MathState extends State{
 		}
 		rightEval.draw(g);
 		leftEval.draw(g);
+		button.draw(g);
+		input.draw(g);
 		operator.draw(g);
+	}
+	
+	public void reset() {
+		leftSide.clear();
+		rightSide.clear();
+		leftSide = new ArrayList<CountObject>();
+		rightSide = new ArrayList<CountObject>();
+		leftValue = rand.nextInt(-1,1);
+		rightValue = rand.nextInt(-1,1);
+//		leftEval = new CountValue(side + side/2, 4*side+side/2, side, side/2, 0);
+//		rightEval = new CountValue(gp.screenWidth - (2*side+ side/2) , 4*side+side/2, side, side/2, 0);
+		setValue();
+		side -= 3*gp.tileSize;
+		leftSide = setList(leftValue);
+		side += 3*gp.tileSize;
+		rightSide = setList(rightValue);
+		operator.generate();
+		button = new Button(gp, "submit", 3*gp.tileSize + gp.tileSize/4, 6*gp.tileSize, gp.tileSize/2, gp.tileSize/2);
+		input = new InputField(gp, "Jawaban", 3*gp.tileSize, 5*gp.tileSize+gp.tile, gp.tileSize, gp.tileSize/2);
+		evaluate();
 	}
 
 }

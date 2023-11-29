@@ -6,7 +6,7 @@ import com.mathincrash.ui.Drawable;
 import com.mathincrash.ui.GamePanel;
 
 public class Point implements Drawable{
-	private int point = 0;
+	public int point = 0;
 	private int x, y, width, height;
 	private int xDraw, yDraw;
 	

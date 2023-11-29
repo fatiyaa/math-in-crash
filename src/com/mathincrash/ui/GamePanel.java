@@ -49,9 +49,10 @@ public class GamePanel extends JPanel implements Runnable{
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
 	
-	Timer timer = new Timer(1000, new ActionListener() {
+	Timer timer = new Timer(1500, new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(gameState == GamePanel.playState)
 			point.update();
 		}
 	});
@@ -71,8 +72,30 @@ public class GamePanel extends JPanel implements Runnable{
         this.addMouseMotionListener(mouseH);
 		this.setFocusable(true);
 		this.ui = new UI(this);
-		
 		this.gameState = playState;
+	}
+	
+	public void resetContinue(int addPoint) {
+		point.point +=addPoint;
+		this.map = new Map(this);
+		this.obstacles.clear();
+		makeObstacle(1);
+	}
+	
+	public void fullReset () {
+		this.vehicle = new Vehicle(this);
+		this.map = new Map(this);
+		this.obstacles = new ArrayList<Obstacle>();
+		this.point = new Point(this);
+		this.random = new Random();
+		makeObstacle(1);
+		this.keyH = new KeyHandler(this);
+		this.mouseH = new MouseHandler(this);
+		this.addKeyListener(keyH);
+		this.addMouseListener(mouseH);
+        this.addMouseMotionListener(mouseH);
+		this.setFocusable(true);
+		this.ui = new UI(this);
 	}
 	
 	public void makeObstacle(int n) {

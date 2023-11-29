@@ -1,11 +1,6 @@
 package com.mathincrash.ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.io.IOException;
 
 import com.mathincrash.state.EndState;
 import com.mathincrash.state.MathState;
@@ -19,7 +14,7 @@ public class UI implements Drawable {
     
     private GamePanel gp;
 //    private Font maruMonica;
-    private State[] states;
+    public State[] states;
 
     public UI(GamePanel gp) {
         this.gp = gp;
