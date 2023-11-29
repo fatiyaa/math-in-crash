@@ -2,7 +2,6 @@ package com.mathincrash.state;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import com.mathincrash.ui.Drawable;
 import com.mathincrash.ui.GamePanel;

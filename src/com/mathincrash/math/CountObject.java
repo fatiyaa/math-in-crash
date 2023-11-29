@@ -49,7 +49,6 @@ public class CountObject extends Crashable implements Drawable{
 	
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
 		g.drawRect(x, y, width, height);
 		
 	}

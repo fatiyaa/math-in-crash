@@ -1,6 +1,7 @@
 package com.mathincrash.state;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,8 +9,9 @@ import com.mathincrash.math.CountObject;
 import com.mathincrash.math.CountValue;
 import com.mathincrash.math.Operator;
 import com.mathincrash.ui.GamePanel;
+import com.mathincrash.util.MakeImage;
 
-public class MathState extends State {
+public class MathState extends State{
 	private ArrayList <CountObject> leftSide, rightSide, 
 	toBeRemovedFromLeft, toBeRemovedFromRight, toBeAddToRight, toBeAddToLeft;
 	private int leftValue, rightValue;
@@ -17,6 +19,7 @@ public class MathState extends State {
 	private int side = gp.tileSize;
 	private Random rand;
 	private Operator operator;
+	private Image background;
 	
 	public MathState(GamePanel gp) {
 		super(gp);
@@ -26,18 +29,22 @@ public class MathState extends State {
 		toBeRemovedFromRight = new ArrayList<CountObject>();
 		toBeAddToRight = new ArrayList<CountObject>();
 		toBeAddToLeft = new ArrayList<CountObject>();
+
 		rand = new Random();
 		leftValue = rand.nextInt(-1,1);
 		rightValue = rand.nextInt(-1,1);
 		leftEval = new CountValue(side + side/2, 4*side+side/2, side, side/2, 0);
 		rightEval = new CountValue(gp.screenWidth - (2*side+ side/2) , 4*side+side/2, side, side/2, 0);
 		setValue();
+
 		leftSide = setList(leftValue);
-		side += 3*gp.tileSize;
 		rightSide = setList(rightValue);
+		side += 3*gp.tileSize;
 		operator = new Operator(gp);
 		
-		// TODO Auto-generated constructor stub
+		String imagePath = "assets/math/Board.png";
+		this.background = new MakeImage(imagePath, gp.tileSize*5, gp.tileSize*6).getImage();
+		
 	}
 	private void setValue() {
 		if(leftValue == 0) leftValue++;
@@ -139,7 +146,6 @@ public class MathState extends State {
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		leftEval.setValue(leftValue*leftSide.size());
 		rightEval.setValue(rightValue*rightSide.size());
 		crashingCase();
@@ -147,8 +153,8 @@ public class MathState extends State {
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		g.drawRect(gp.tileSize, gp.tileSize, gp.tileSize*5, gp.tileSize*6);
+        g.drawImage(background, gp.tileSize, gp.tileSize, null);
+		// g.drawRect(gp.tileSize, gp.tileSize, gp.tileSize*5, gp.tileSize*6);
 		for(CountObject co : leftSide) {
 			co.draw(g);
 		}
