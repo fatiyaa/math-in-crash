@@ -64,10 +64,10 @@ public class MathState extends State {
 		int n = rand.nextInt(1, 21);
 		ArrayList<CountObject> list = new ArrayList<CountObject>();
 		if (list.isEmpty()) {
-			list.add(new CountObject(gp, side + 10, 2 * gp.tileSize - 10, value));
+			list.add(new CountObject(gp, side + 20, 2 * gp.tileSize - 10, value));
 		}
 		for (int i = 0; i < n; i++) {
-			int xco = rand.nextInt(side + 10, side + 2 * gp.tileSize - 30);
+			int xco = rand.nextInt(side + 10, side + 2 * gp.tileSize - 40);
 			int yco = rand.nextInt(2 * gp.tileSize, 4 * gp.tileSize);
 			CountObject co = new CountObject(gp, xco, yco, value);
 			boolean crash = false;
