@@ -69,7 +69,7 @@ public class Button implements Drawable {
 
 //        g.setFont(g.getFont().deriveFont(Font.BOLD, (height-5F)));
         int x = screenX + (width-(int)g.getFontMetrics().getStringBounds(text, g).getWidth())/2;
-        int y = screenY + height - 5;
+        int y = screenY + (height/2 - g.getFontMetrics().getHeight()/2 + g.getFontMetrics().getAscent());
 
         g.setColor(shaderColor);
         g.drawString(text, x+2, y+2);

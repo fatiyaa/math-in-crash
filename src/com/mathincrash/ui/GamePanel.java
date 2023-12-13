@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.addMouseMotionListener(mouseH);
 		this.setFocusable(true);
 		this.ui = new UI(this);
-		this.gameState = playState;
+		this.gameState = titleState;
 	}
 	
 	public void resetContinue(int addPoint) {
@@ -162,7 +162,7 @@ public class GamePanel extends JPanel implements Runnable{
 					p = true;
 				}
 			}
-	    	if (p) makeObstacle(random.nextInt(1,11));
+	    	if (p) makeObstacle(random.nextInt(1,9));
 //	    	System.out.println(obstacles.size());
 	    	timer.start();
     	}
@@ -174,8 +174,9 @@ public class GamePanel extends JPanel implements Runnable{
 
 		this.update();
 		if (gameState == titleState) ui.draw(g);
+		else if (gameState == endState) ui.draw(g);
 		else if(gameState == mathState) {
-//			System.out.println("math");
+//			System.out.println("math");t
 			ui.draw(g);
 		}
 		else {
@@ -188,6 +189,10 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
-	
+	public void reset() {
+        this.obstacles.clear();;
+        this.ui.reset();
+        this.gameState = titleState;
+    }
 
 }

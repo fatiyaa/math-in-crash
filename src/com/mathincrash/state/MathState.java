@@ -214,7 +214,7 @@ public class MathState extends State {
 		side += 3 * gp.tileSize;
 		rightSide = setList(rightValue);
 		operator.generate();
-		button = new Button(gp, "submit", 3 * gp.tileSize + gp.tileSize / 4, 6 * gp.tileSize, gp.tileSize / 2,
+		button = new Button(gp, "submit", 3 * gp.tileSize, 6 * gp.tileSize, gp.tileSize,
 				gp.tileSize / 2);
 		input = new InputField(gp, "Jawaban", 3 * gp.tileSize, 5 * gp.tileSize + gp.tile, gp.tileSize, gp.tileSize / 2);
 		evaluate();
