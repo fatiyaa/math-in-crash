@@ -33,6 +33,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener{
         this.mouseY = e.getY();
         this.mouseReleased = true;
         this.mousePressed = false;
+        this.mouseDragged = false;
     }
 
     @Override

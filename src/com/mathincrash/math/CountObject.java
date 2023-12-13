@@ -10,7 +10,7 @@ public class CountObject extends Crashable implements Drawable{
 	private GamePanel gp;
 	public int val;
 	float centerX, centerY;
-	public boolean status = false;
+	public boolean status = true;
 	private int offsetX, offsetY;
 	
 	public CountObject(GamePanel gp, int x, int y, int val) {
@@ -31,6 +31,7 @@ public class CountObject extends Crashable implements Drawable{
 		if(this.status == true && gp.mouseH.mouseReleased == true) this.status = false;
 		else if(this.status == true  && gp.mouseH.mousePressed == true) {
 //			System.out.println("Drag");
+			
 			moved(offsetX, offsetY);
 		}
 		else if (gp.mouseH.mousePressed == true) {

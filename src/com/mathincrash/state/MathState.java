@@ -92,9 +92,11 @@ public class MathState extends State {
 
 	public void crashingCase() {
 		for (CountObject col : leftSide) {
-			col.update();
+			if (gp.mouseH.mouseDragged==false) col.update();
+			else if (col.status)col.update();
 			for (CountObject cor : rightSide) {
-				cor.update();
+				if (gp.mouseH.mouseDragged==false) cor.update();
+				else if (cor.status)cor.update();
 				if (col.crashed(cor)) {
 					if (operator.stringOperator.equals("+")) {
 						if (col.val != cor.val) {
