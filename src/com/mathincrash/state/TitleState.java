@@ -2,11 +2,8 @@ package com.mathincrash.state;
 
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;

@@ -14,7 +14,7 @@ public class Point implements Drawable{
 		width = gp.tileSize;
 		height = gp.tileSize/2;
 		x = gp.screenWidth - width -10;
-		y = 10;
+		y = gp.tileSize/2;
 	}
 	
 	@Override

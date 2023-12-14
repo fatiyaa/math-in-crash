@@ -16,6 +16,7 @@ import javax.swing.Timer;
 import com.mathincrash.map.Map;
 import com.mathincrash.onroad.Obstacle;
 import com.mathincrash.onroad.Vehicle;
+import com.mathincrash.util.HighScore;
 import com.mathincrash.util.Point;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -44,12 +45,15 @@ public class GamePanel extends JPanel implements Runnable{
     public int gameState;
     public UI ui;
     
+    public Button pauseButton;
 	public Point point;
+	String highScoreFile = "highscore.txt";
+	public HighScore highScoreManager;
 	
 	public Map map;
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
-	public Button pauseButton;
+	
 	
 	Timer timer = new Timer(1500, new ActionListener() {
 		@Override
@@ -79,6 +83,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.point = new Point(this);
 		makeObstacle(1);
 		this.pauseButton = new Button(this, "||", 10, 10, this.tileSize/2, this.tileSize/2);
+		this.highScoreManager =  new HighScore(highScoreFile, this);
 	}
 	
 	public void makeObstacle(int n) {
@@ -173,6 +178,7 @@ public class GamePanel extends JPanel implements Runnable{
 			g.setFont(g.getFont().deriveFont(Font.BOLD, 20));
 			this.point.draw(g);
 			this.pauseButton.draw(g);
+			this.highScoreManager.draw(g);
 		}
 		else ui.draw(g);
 	}
@@ -194,4 +200,14 @@ public class GamePanel extends JPanel implements Runnable{
 	public void addPoint(int point) {
 		this.point.point += point;
 	}
+	
+	
+
+//    // Simpan highscore
+//    int currentHighScore = 5000; // Ganti dengan highscore saat ini dari game
+//    highScoreManager.saveHighScore(currentHighScore);
+//
+//    // Memuat dan menampilkan highscore
+//    int loadedHighScore = highScoreManager.loadHighScore();
+//    System.out.println("Highscore yang disimpan: " + loadedHighScore);
 }
