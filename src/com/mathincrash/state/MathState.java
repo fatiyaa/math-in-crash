@@ -172,8 +172,8 @@ public class MathState extends State {
 		crashingCase();
 		if (button.state == Button.submitted) {
 			if (input.getAnswer() == this.answer) {
+				gp.popList();
 				gp.gameState = GamePanel.playState;
-				gp.resetContinue(50);
 			} else {
 				gp.gameState = GamePanel.endState;
 			}

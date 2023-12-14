@@ -1,6 +1,7 @@
 package com.mathincrash.ui;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -60,44 +61,24 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.vehicle = new Vehicle(this);
-		this.map = new Map(this);
-		this.obstacles = new ArrayList<Obstacle>();
-		this.point = new Point(this);
-		this.random = new Random();
-		makeObstacle(1);
 		this.keyH = new KeyHandler(this);
 		this.mouseH = new MouseHandler(this);
 		this.addKeyListener(keyH);
 		this.addMouseListener(mouseH);
-        this.addMouseMotionListener(mouseH);
+		this.addMouseMotionListener(mouseH);
 		this.setFocusable(true);
 		this.ui = new UI(this);
+		this.random = new Random();
 		this.gameState = titleState;
-		this.pauseButton = new Button(this, "||", 10, 10, this.tileSize/2, this.tileSize/2);
-	}
-	
-	public void resetContinue(int addPoint) {
-		point.point +=addPoint;
 		this.map = new Map(this);
-		this.obstacles.clear();
-		makeObstacle(1);
 	}
 	
-	public void fullReset () {
+	public void buildGame () {
 		this.vehicle = new Vehicle(this);
-		this.map = new Map(this);
 		this.obstacles = new ArrayList<Obstacle>();
 		this.point = new Point(this);
-		this.random = new Random();
 		makeObstacle(1);
-		this.keyH = new KeyHandler(this);
-		this.mouseH = new MouseHandler(this);
-		this.addKeyListener(keyH);
-		this.addMouseListener(mouseH);
-        this.addMouseMotionListener(mouseH);
-		this.setFocusable(true);
-		this.ui = new UI(this);
+		this.pauseButton = new Button(this, "||", 10, 10, this.tileSize/2, this.tileSize/2);
 	}
 	
 	public void makeObstacle(int n) {
@@ -189,6 +170,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			Graphics2D g2d = (Graphics2D) g;
 			this.vehicle.draw(g2d);
+			g.setFont(g.getFont().deriveFont(Font.BOLD, 20));
 			this.point.draw(g);
 			this.pauseButton.draw(g);
 		}
@@ -201,4 +183,12 @@ public class GamePanel extends JPanel implements Runnable{
         this.gameState = titleState;
     }
 
+	public void popList() {
+		for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
+    		Obstacle obstacle = i.next();
+			if(obstacle.crashed(vehicle)) {
+				i.remove();
+			}
+		}
+	}
 }

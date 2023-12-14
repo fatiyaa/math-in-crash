@@ -43,7 +43,9 @@ public class TitleState extends State {
         playButton.update();
         quitButton.update();
         if (playButton.state == Button.submitted) {
+        	gp.buildGame();
             gp.gameState = GamePanel.playState;
+            
 //            gp.bgm.playLoop(Sound.bgmBattle);
         }
         if (quitButton.state == Button.submitted) System.exit(0);

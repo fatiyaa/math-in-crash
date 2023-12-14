@@ -52,14 +52,14 @@ public class KeyHandler implements KeyListener {
         		case KeyEvent.VK_MINUS: {
         			MathState inp = (MathState) gp.ui.states[GamePanel.mathState];
         			inp.input.addInput(Character.toString(keys));
-        			System.out.println("tap");
+//        			System.out.println("tap");
         			break;
         			
         		}
         		case KeyEvent.VK_BACK_SPACE:{
         			MathState inp = (MathState) gp.ui.states[GamePanel.mathState];
         			inp.input.deleteBack();
-        			System.out.println("tap");
+//        			System.out.println("tap");
         			break;
         		}
         	}
