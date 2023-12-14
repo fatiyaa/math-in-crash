@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map map;
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
+	public Button pauseButton;
 	
 	Timer timer = new Timer(1500, new ActionListener() {
 		@Override
@@ -73,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 		this.ui = new UI(this);
 		this.gameState = titleState;
+		this.pauseButton = new Button(this, "||", 10, 10, this.tileSize/2, this.tileSize/2);
 	}
 	
 	public void resetContinue(int addPoint) {
@@ -151,6 +153,8 @@ public class GamePanel extends JPanel implements Runnable{
     	else if (gameState == playState){
     		this.map.update();
     		vehicle.update();
+    		this.pauseButton.update();
+    		if (pauseButton.state == Button.submitted) this.gameState = pauseState;
 	    	boolean p = false;
 	    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
 	    		Obstacle obstacle = i.next();
@@ -173,20 +177,22 @@ public class GamePanel extends JPanel implements Runnable{
 		this.map.draw(g);
 
 		this.update();
-		if (gameState == titleState) ui.draw(g);
-		else if (gameState == endState) ui.draw(g);
-		else if(gameState == mathState) {
-//			System.out.println("math");t
-			ui.draw(g);
-		}
-		else {
+//		if (gameState == titleState) ui.draw(g);
+//		else if (gameState == endState) ui.draw(g);
+//		else if(gameState == mathState) {
+////			System.out.println("math");t
+//			ui.draw(g);
+//		}
+		if(gameState == playState){
 			for(Obstacle obstacle : obstacles) {
 				obstacle.draw(g);
 			}
 			Graphics2D g2d = (Graphics2D) g;
 			this.vehicle.draw(g2d);
 			this.point.draw(g);
+			this.pauseButton.draw(g);
 		}
+		else ui.draw(g);
 	}
 	
 	public void reset() {
