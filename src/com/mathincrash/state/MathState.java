@@ -173,6 +173,7 @@ public class MathState extends State {
 		if (button.state == Button.submitted) {
 			if (input.getAnswer() == this.answer) {
 				gp.popList();
+				gp.addPoint(20);
 				gp.gameState = GamePanel.playState;
 			} else {
 				gp.gameState = GamePanel.endState;

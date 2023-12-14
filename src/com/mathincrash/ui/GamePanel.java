@@ -191,4 +191,7 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 		}
 	}
+	public void addPoint(int point) {
+		this.point.point += point;
+	}
 }
