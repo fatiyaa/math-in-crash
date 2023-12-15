@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
+import com.mathincrash.util.Sound;
 
 public class EndState extends State{
 
@@ -45,10 +46,12 @@ public class EndState extends State{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		homeButton.update();
 	    quitButton.update();
-	    if (homeButton.state == Button.submitted) gp.reset();
+	    if (homeButton.state == Button.submitted) {
+			gp.sfx.play(Sound.sfxClick);
+			gp.reset();
+		}
         if (quitButton.state == Button.submitted) System.exit(0);
 	}
 

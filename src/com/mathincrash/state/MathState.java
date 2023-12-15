@@ -11,6 +11,7 @@ import com.mathincrash.math.Operator;
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
 import com.mathincrash.util.MakeImage;
+import com.mathincrash.util.Sound;
 import com.mathincrash.ui.InputField;
 
 public class MathState extends State {
@@ -171,12 +172,17 @@ public class MathState extends State {
 		// input.update();
 		crashingCase();
 		if (button.state == Button.submitted) {
+			gp.sfx.play(Sound.sfxClick);
 			if (input.getAnswer() == this.answer) {
 				gp.popList();
 				gp.addPoint(20);
 				gp.gameState = GamePanel.playState;
+				gp.bgm.playLoop(Sound.bgmGame);
+
 			} else {
 				gp.gameState = GamePanel.endState;
+				gp.bgm.stop();
+				gp.sfx.play(Sound.sfxGameOver);
 			}
 		}
 		button.update();

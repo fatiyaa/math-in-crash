@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
+import com.mathincrash.util.Sound;
 
 public class PauseState extends State {
     
@@ -45,9 +46,16 @@ public class PauseState extends State {
         resumeButton.update();
         homeButton.update();
         quitButton.update();
-        if (resumeButton.state == Button.submitted) gp.gameState = GamePanel.playState;
-        if (homeButton.state == Button.submitted) gp.reset();
+        if (resumeButton.state == Button.submitted){
+            gp.sfx.play(Sound.sfxClick);
+            gp.gameState = GamePanel.playState;
+        }
+        if (homeButton.state == Button.submitted){
+            gp.sfx.play(Sound.sfxClick);
+            gp.reset();
+        } 
         if (quitButton.state == Button.submitted) {
+            gp.sfx.play(Sound.sfxClick);
         	if(gp.point.point > gp.highScoreManager.highScore) {
             	gp.highScoreManager.saveHighScore(gp.point.point);
             }

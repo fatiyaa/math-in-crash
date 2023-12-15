@@ -18,6 +18,7 @@ import com.mathincrash.onroad.Obstacle;
 import com.mathincrash.onroad.Vehicle;
 import com.mathincrash.util.HighScore;
 import com.mathincrash.util.Point;
+import com.mathincrash.util.Sound;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -44,6 +45,9 @@ public class GamePanel extends JPanel implements Runnable{
     public MouseHandler mouseH;
     public int gameState;
     public UI ui;
+
+	public Sound bgm;
+    public Sound sfx;
     
     public Button pauseButton;
 	public Point point;
@@ -77,6 +81,8 @@ public class GamePanel extends JPanel implements Runnable{
 		this.random = new Random();
 		this.gameState = titleState;
 		this.map = new Map(this);
+		this.bgm = new Sound();
+        this.sfx = new Sound();
 	}
 	
 	public void buildGame () {
@@ -146,7 +152,10 @@ public class GamePanel extends JPanel implements Runnable{
     		this.pauseButton.update();
     		this.speedDouble += 0.00001;
     		this.speed = (int) Math.floor(speedDouble);
-    		if (pauseButton.state == Button.submitted) this.gameState = pauseState;
+    		if (pauseButton.state == Button.submitted){
+				sfx.play(Sound.sfxClick);
+				this.gameState = pauseState;
+			}
 	    	boolean p = false;
 	    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {
 	    		Obstacle obstacle = i.next();

@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
+import com.mathincrash.util.Sound;
 
 
 public class TitleState extends State {
@@ -40,12 +41,15 @@ public class TitleState extends State {
         playButton.update();
         quitButton.update();
         if (playButton.state == Button.submitted) {
+            gp.sfx.play(Sound.sfxClick);
         	gp.buildGame();
             gp.gameState = GamePanel.playState;
-            
-//            gp.bgm.playLoop(Sound.bgmBattle);
+           gp.bgm.playLoop(Sound.bgmGame);
         }
-        if (quitButton.state == Button.submitted) System.exit(0);
+        if (quitButton.state == Button.submitted){
+            System.exit(0);
+        } 
+            
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.mathincrash.state.MathState;
 import com.mathincrash.ui.Drawable;
 import com.mathincrash.ui.GamePanel;
 import com.mathincrash.util.MakeImage;
+import com.mathincrash.util.Sound;
 
 public class Vehicle extends Crashable implements Drawable{
 	public static final int LEFT = 1;
@@ -29,7 +30,12 @@ public class Vehicle extends Crashable implements Drawable{
 	public void update() {
 		for(Obstacle ob : gp.obstacles) {
 			if(this.crashed(ob)) {
+				gp.sfx.play(Sound.sfxCrash);
+
 				gp.gameState = GamePanel.mathState;
+				gp.bgm.stop();
+				gp.bgm.playLoop(Sound.bgmMIC);
+
 				MathState inp = (MathState) gp.ui.states[GamePanel.mathState];
 				inp.reset();
 			}
