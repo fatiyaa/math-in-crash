@@ -3,11 +3,13 @@ package com.mathincrash.state;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import com.mathincrash.math.CountObject;
 import com.mathincrash.math.CountValue;
 import com.mathincrash.math.Operator;
+import com.mathincrash.onroad.Obstacle;
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
 import com.mathincrash.util.MakeImage;
@@ -164,6 +166,17 @@ public class MathState extends State {
 		this.toBeRemovedFromLeft.clear();
 		this.toBeRemovedFromRight.clear();
 	}
+	public void popList() {
+		for (Iterator<Obstacle> i = gp.obstacles.iterator(); i.hasNext();) {
+			Obstacle obstacle = i.next();
+			if (obstacle.crashed(gp.vehicle)) {
+				i.remove();
+			}
+		}
+	}
+	public void addPoint(int point) {
+        gp.point.point += point;
+    }
 
 	@Override
 	public void update() {
@@ -174,8 +187,8 @@ public class MathState extends State {
 		if (button.state == Button.submitted) {
 			gp.sfx.play(Sound.sfxClick);
 			if (input.getAnswer() == this.answer) {
-				gp.popList();
-				gp.addPoint(20);
+				popList();
+				addPoint(20);
 				gp.gameState = GamePanel.playState;
 				gp.bgm.playLoop(Sound.bgmGame);
 
