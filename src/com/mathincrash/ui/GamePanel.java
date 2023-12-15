@@ -53,6 +53,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public Map map;
 	public Vehicle vehicle;
 	public ArrayList <Obstacle> obstacles;
+	public int speed;
+	private double speedDouble;
 	
 	
 	Timer timer = new Timer(1500, new ActionListener() {
@@ -78,6 +80,8 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void buildGame () {
+		this.speed = 2;
+		this.speedDouble = 2;
 		this.vehicle = new Vehicle(this);
 		this.obstacles = new ArrayList<Obstacle>();
 		this.point = new Point(this);
@@ -140,6 +144,8 @@ public class GamePanel extends JPanel implements Runnable{
     		this.map.update();
     		vehicle.update();
     		this.pauseButton.update();
+    		this.speedDouble += 0.00001;
+    		this.speed = (int) Math.floor(speedDouble);
     		if (pauseButton.state == Button.submitted) this.gameState = pauseState;
 	    	boolean p = false;
 	    	for(Iterator<Obstacle> i = obstacles.iterator(); i.hasNext();) {

@@ -47,7 +47,12 @@ public class PauseState extends State {
         quitButton.update();
         if (resumeButton.state == Button.submitted) gp.gameState = GamePanel.playState;
         if (homeButton.state == Button.submitted) gp.reset();
-        if (quitButton.state == Button.submitted) System.exit(0);
+        if (quitButton.state == Button.submitted) {
+        	if(gp.point.point > gp.highScoreManager.highScore) {
+            	gp.highScoreManager.saveHighScore(gp.point.point);
+            }
+        	System.exit(0);
+        }
     }
 
     @Override

@@ -60,15 +60,18 @@ public class EndState extends State{
 
         g.setColor(Color.WHITE);
         g.setFont(g.getFont().deriveFont(Font.BOLD, 70));
+        
         String text1 = "GAME OVER";
         String text2 = "SCORE: " + Integer.toString(gp.point.point);
         String text3 = "HIGH SCORE!";
+        
         int x = (gp.screenWidth-getLength(g, text1))/2;
         int y = 7*gp.tileSize/4;
         drawShadedText(g, text1, x, y, 3, 3);
         x = (gp.screenWidth-getLength(g, text2))/2;
         y += g.getFontMetrics().getHeight();
         drawShadedText(g, text2, x, y, 3, 3);
+        
         if(gp.point.point>gp.highScoreManager.highScore) {
         	gp.highScoreManager.saveHighScore(gp.point.point);
         	x = (gp.screenWidth-getLength(g, text3))/2;

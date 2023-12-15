@@ -33,7 +33,7 @@ public class Obstacle extends Crashable implements Drawable{
 	
 	@Override
 	public void update() {
-		y+=speedY;
+		y+=gp.speed;
 		
 	}
 

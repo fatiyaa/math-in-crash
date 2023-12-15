@@ -19,11 +19,12 @@ public class Map implements Drawable {
     private int tiles1, tiles7, tiles2, tiles6,tiles3,tiles4,tiles5, y;
     private int tileSize;
     private int maxTileRow;
-    float scrollSpeed = 2;
+    private GamePanel gp;
 
     public Map(GamePanel gp) {
         this.tileSize = gp.tileSize;
         this.maxTileRow = gp.maxTileRow;
+        this.gp = gp;
         
         this.y = -tileSize;
         this.tiles1 = tileSize * 0;
@@ -48,8 +49,8 @@ public class Map implements Drawable {
 
     @Override
     public void update() {
-        y += scrollSpeed;
-        if (y > 0) {
+        y += gp.speed;
+        if (y > -gp.speed) {
             y = -tileSize;
         }
     }
