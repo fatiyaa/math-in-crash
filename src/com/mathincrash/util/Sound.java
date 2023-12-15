@@ -47,8 +47,8 @@ public class Sound {
 
     private void setFile(int type) {
         try {
-            URL url = soundURL[type];
-            System.out.println("Sound file URL: " + url);
+            // URL url = soundURL[type];
+            // System.out.println("Sound file URL: " + url);
 
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[type]);
             this.clip = AudioSystem.getClip();
