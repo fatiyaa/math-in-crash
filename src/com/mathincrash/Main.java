@@ -15,6 +15,7 @@ public class Main {
         gp.startThread();
 
         window.pack();
+        window.setLocationRelativeTo(null);
         window.setResizable(false);
         window.setVisible(true);
     }
