@@ -46,10 +46,7 @@ public class SoundButton implements Drawable{
 			 if(active == true) {
 				 active = false;
 				 gp.bgm.playLoop(Sound.bgmGame);
-//				 System.out.println("on");
-			 }
-			 else {
-//				 System.out.println("off");
+			 }else {
 				 active = true;
 				 gp.bgm.stop();
 			 }
@@ -68,31 +65,26 @@ public class SoundButton implements Drawable{
 	     
 	     if(active && state == hovered) {
 	    	 g.setColor(bgColor.darker());
-//	    	 System.out.println("line");
-	     }
-	     else if(active) {
+	     }else if(active) {
 	    	 g.setColor(bgColor.darker().darker());
-	     }
-	     else if (state == hovered) {
+	     }else if (state == hovered) {
 	    	 g.setColor(bgColor.darker());
-	     }
-	     else if (state == normal) g.setColor(bgColor);
-	     else if (state == clicked) g.setColor(bgColor.darker().darker());
+	     }else if (state == normal) 
+	    	 g.setColor(bgColor);
+	     else if (state == clicked) 
+	    	 g.setColor(bgColor.darker().darker());
 	     g.fillRoundRect(x, y, width, height, 5, 5);
 	     
 	     g.setColor(Color.WHITE);
 	     g.drawRoundRect(x, y, width, height, 5, 5);
+	     
 	     if(active == true) {
 	    	 g.setColor(Color.red);
 	    	 Graphics2D g2 = (Graphics2D) g;
 	    	 g2.setStroke(new BasicStroke(3)); 
-	    	 g2.drawLine(x, y, x+width, y+height);
-//	    	 gp.bgm.stop();
-//	    	 
+	    	 g2.drawLine(x, y, x+width, y+height);	    	 
 	     }
-//	     }else {
-//	    	 gp.bgm.playLoop(Sound.bgmGame);
-//	     }
+
 	     
 	}
 	

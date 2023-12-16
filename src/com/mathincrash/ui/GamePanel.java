@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public Map map;
 	public SoundButton soundButton;
+	public VolumeButton volumeButton;
 	public Sound bgm;
 	public Sound sfx;
 	public Point point;
@@ -50,12 +51,15 @@ public class GamePanel extends JPanel implements Runnable {
 	public HighScore highScoreManager;
 	String highScoreFile = "highscore.txt";
 
+	
+	
 	public GamePanel() {
-		this.bgm = new Sound();
-		this.sfx = new Sound();
-		this.buildGame();
-
 		this.soundButton = new SoundButton(this, (screenWidth-4*tileSize)/2, 3*tileSize+tileSize/4);
+		this.volumeButton = new VolumeButton(this);
+		this.buildGame();
+		this.bgm = new Sound(this);
+		this.sfx = new Sound(this);
+
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.keyH = new KeyHandler(this);
 		this.mouseH = new MouseHandler(this);
@@ -99,9 +103,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 		this.ui.update();
-		if(this.soundButton.active) {
-			bgm.stop();
-			sfx.stop();
+		if (!this.soundButton.active) {
+			bgm.update();
+			sfx.update();
 		}
 	}
 
@@ -114,7 +118,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void reset() {
 		this.ui.reset();
-		bgm.playLoop(Sound.bgmGame);
+		if(!soundButton.active)
+			bgm.playLoop(Sound.bgmGame);
 		this.gameState = titleState;
 	}
 }

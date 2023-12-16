@@ -15,12 +15,7 @@ public class EndState extends State{
 	
 	 public EndState(GamePanel gp) {
 	        super(gp);
-//	        int width = 3*gp.tileSize/2;
-//	        int height = gp.tileSize/4;
-//	        int x = (gp.screenWidth-width)/2;
-//	        int y = 9*gp.tileSize/4 + height;
-//	        int yOffset = 3*height/2;
-	        
+
 	        int width = 3*(gp.tileSize-10);
 	        int height = gp.tileSize-10;
 	        int x = (gp.screenWidth-width)/2;
@@ -32,16 +27,6 @@ public class EndState extends State{
 	 }
 	 
 	        
-//	        try {
-//	            this.bg = ImageIO.read(getClass().getResourceAsStream("/state/menu/background.png"));
-//	            BufferedImage resizedBg = new BufferedImage(gp.screenWidth, gp.screenHeight, bg.getType());
-//	            Graphics2D g = resizedBg.createGraphics();
-//	            g.drawImage(bg, 0, 0, gp.screenWidth, gp.screenHeight, null);
-//	            this.bg = resizedBg;
-//	            g.dispose();
-//	        } catch (IOException e) {
-//	            e.printStackTrace();
-//	        }
 	
 
 	@Override

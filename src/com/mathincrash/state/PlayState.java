@@ -37,9 +37,7 @@ public class PlayState extends State {
     }
 
     public void makeObstacle(int n) {
-//        if (gp.obstacles.isEmpty()) {
-//            gp.obstacles.add(new Obstacle(gp));
-//        }
+
         while (gp.obstacles.size() < n) {
             Obstacle ob = new Obstacle(gp, random.nextInt(-5, 0) * gp.tileSize * 5);
             boolean crash = false;
@@ -71,23 +69,24 @@ public class PlayState extends State {
         gp.speed = 2;
         gp.obstacles.clear();
         gp.obstacles = new ArrayList<Obstacle>();
+        gp.point.point = 0;
+        timer.restart();
         makeObstacle(1);
         this.update();
     }
 
     @Override
     public void update() {
-//    	gp.speed+=0.001;
+
         gp.vehicle.update();
         this.pauseButton.update();
-//        this.speedDouble += 0.00001;
-//        gp.speed = (int) Math.floor(speedDouble);
+
         gp.map.update();
         if (pauseButton.state == Button.submitted) {
             gp.sfx.play(Sound.sfxClick);
             gp.gameState = GamePanel.pauseState;
-//            gp.bgm.playLoop(Sound.bgmGame);
         }
+        
         boolean p = false;
         for (Iterator<Obstacle> i = gp.obstacles.iterator(); i.hasNext();) {
             Obstacle obstacle = i.next();
@@ -106,7 +105,7 @@ public class PlayState extends State {
         }
         if (p)
             makeObstacle(random.nextInt(1, 9));
-        // System.out.println(obstacles.size());
+
         timer.start();
     }
 

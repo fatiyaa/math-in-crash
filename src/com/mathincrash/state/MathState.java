@@ -230,9 +230,7 @@ public class MathState extends State {
 		rightSide = new ArrayList<CountObject>();
 		leftValue = rand.nextInt(-1, 1);
 		rightValue = rand.nextInt(-1, 1);
-		// leftEval = new CountValue(side + side/2, 4*side+side/2, side, side/2, 0);
-		// rightEval = new CountValue(gp.screenWidth - (2*side+ side/2) , 4*side+side/2,
-		// side, side/2, 0);
+
 		setValue();
 		side -= 3 * gp.tileSize;
 		leftSide = setList(leftValue);

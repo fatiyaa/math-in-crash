@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
+import com.mathincrash.ui.VolumeButton;
 import com.mathincrash.util.Sound;
 
 public class PauseState extends State {
@@ -66,6 +67,7 @@ public class PauseState extends State {
         if(gp.soundButton.state == Button.submitted) {
         	gp.sfx.play(Sound.sfxClick);
         }
+        gp.volumeButton.update();
     }
 
     @Override
@@ -86,5 +88,6 @@ public class PauseState extends State {
         g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
         homeButton.draw(g);
         gp.soundButton.draw(g);
+        gp.volumeButton.draw(g);
     }
 }
