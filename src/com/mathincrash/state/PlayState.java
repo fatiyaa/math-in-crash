@@ -60,6 +60,7 @@ public class PlayState extends State {
         public void actionPerformed(ActionEvent e) {
             if (gp.gameState == GamePanel.playState)
                 gp.point.update();
+//            	gp.speed += 0.001;
         }
     });
 
@@ -67,6 +68,7 @@ public class PlayState extends State {
 
     public void reset() {
         System.out.println("reset playstase");
+        gp.speed = 2;
         gp.obstacles.clear();
         gp.obstacles = new ArrayList<Obstacle>();
         makeObstacle(1);
@@ -75,14 +77,16 @@ public class PlayState extends State {
 
     @Override
     public void update() {
-        gp.map.update();
+//    	gp.speed+=0.001;
         gp.vehicle.update();
         this.pauseButton.update();
-        this.speedDouble += 0.00001;
-        gp.speed = (int) Math.floor(speedDouble);
+//        this.speedDouble += 0.00001;
+//        gp.speed = (int) Math.floor(speedDouble);
+        gp.map.update();
         if (pauseButton.state == Button.submitted) {
             gp.sfx.play(Sound.sfxClick);
             gp.gameState = GamePanel.pauseState;
+            gp.bgm.playLoop(Sound.bgmGame);
         }
         boolean p = false;
         for (Iterator<Obstacle> i = gp.obstacles.iterator(); i.hasNext();) {
@@ -90,6 +94,10 @@ public class PlayState extends State {
             obstacle.update();
             if (!obstacle.onScreen()) {
                 i.remove();
+                this.speedDouble += 0.05;
+                if((int)(this.speedDouble*10)%10 == 5)
+                	gp.speed += 0.5;
+                System.out.println(gp.speed);
             } else {
                 p = true;
             }

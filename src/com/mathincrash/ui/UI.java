@@ -80,7 +80,7 @@ public class UI implements Drawable {
             break;
         }
         case GamePanel.endState: {
-            states[GamePanel.playState].draw(g);
+//            states[GamePanel.playState].draw(g);
             states[GamePanel.endState].draw(g);
             break;
         }

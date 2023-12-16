@@ -203,6 +203,8 @@ public class MathState extends State {
 
 	@Override
 	public void draw(Graphics g) {
+		g.setColor(shaderColor);
+        g.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 		g.drawImage(background, gp.tileSize, gp.tileSize, null);
 		// g.drawRect(gp.tileSize, gp.tileSize, gp.tileSize*5, gp.tileSize*6);
 		for (CountObject co : leftSide) {

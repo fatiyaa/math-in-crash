@@ -41,11 +41,11 @@ public class GamePanel extends JPanel implements Runnable {
 	public Map map;
 	public Sound bgm;
 	public Sound sfx;
-	public int speed;
 	public Point point;
 	public Vehicle vehicle;
 	public ArrayList<Obstacle> obstacles;
 
+	public double speed;
 	public HighScore highScoreManager;
 	String highScoreFile = "highscore.txt";
 

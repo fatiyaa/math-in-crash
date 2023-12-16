@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
+import com.mathincrash.ui.SoundButton;
 import com.mathincrash.util.Sound;
 
 public class PauseState extends State {
@@ -14,17 +15,19 @@ public class PauseState extends State {
     private Button resumeButton;
     private Button homeButton;
     private Button quitButton;
+    private SoundButton soundButton;
 
     private BufferedImage bg;
 
     public PauseState(GamePanel gp) {
         super(gp);
         int width = 4* gp.tileSize;
-        int height = gp.tileSize;
+        int height = gp.tileSize*3/4;
         int x = (gp.screenWidth-width)/2;
-        int y = 8*gp.tileSize/4;
+        int y = 3*gp.tileSize;
         int yOffset = 3*height/2;
         
+        this.soundButton = new SoundButton(gp, x, y+yOffset/4);
         this.resumeButton = new Button(gp, "RESUME", x, y+=yOffset, width, height);
         this.homeButton = new Button(gp, "MAIN MENU", x, y+=yOffset, width, height);
         this.quitButton = new Button(gp, "QUIT", x, y+=yOffset, width, height);
@@ -46,6 +49,7 @@ public class PauseState extends State {
         resumeButton.update();
         homeButton.update();
         quitButton.update();
+        soundButton.update();
         if (resumeButton.state == Button.submitted){
             gp.sfx.play(Sound.sfxClick);
             gp.gameState = GamePanel.playState;
@@ -61,6 +65,9 @@ public class PauseState extends State {
             }
         	System.exit(0);
         }
+        if(soundButton.state == Button.submitted) {
+        	gp.sfx.play(Sound.sfxClick);
+        }
     }
 
     @Override
@@ -75,10 +82,11 @@ public class PauseState extends State {
         int x = (gp.screenWidth-getLength(g, text))/2;
         int y = 2*gp.tileSize;
         drawShadedText(g, text, x, y, 3, 3);
-        g.setFont(g.getFont().deriveFont(Font.BOLD, 70));
+        g.setFont(g.getFont().deriveFont(Font.BOLD, 60));
         resumeButton.draw(g);
         quitButton.draw(g);
-        g.setFont(g.getFont().deriveFont(Font.BOLD, 60));
+        g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
         homeButton.draw(g);
+        soundButton.draw(g);
     }
 }

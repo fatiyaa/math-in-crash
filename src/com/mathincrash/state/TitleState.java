@@ -44,7 +44,7 @@ public class TitleState extends State {
             gp.sfx.play(Sound.sfxClick);
         	// gp.buildGame();
             gp.gameState = GamePanel.playState;
-           gp.bgm.playLoop(Sound.bgmGame);
+            gp.bgm.playLoop(Sound.bgmGame);
         }
         if (quitButton.state == Button.submitted){
             System.exit(0);
