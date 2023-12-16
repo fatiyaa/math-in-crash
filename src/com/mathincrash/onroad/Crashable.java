@@ -1,10 +1,10 @@
 package com.mathincrash.onroad;
 
 public class Crashable {
-	public int x,y;
-	public int width, height;
+	public double y;
+	public int width, height, x;
 	
-	public Crashable(int x, int y, int width, int height) {
+	public Crashable(int x, double y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;

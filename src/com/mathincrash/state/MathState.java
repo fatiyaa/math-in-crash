@@ -25,7 +25,7 @@ public class MathState extends State {
 	private Random rand;
 	private Operator operator;
 	private Image background;
-	private Button button;
+	public Button button;
 	public InputField input;
 	private int answer;
 

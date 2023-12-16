@@ -37,7 +37,7 @@ public class CountObject extends Crashable implements Drawable{
 		else if (gp.mouseH.mousePressed == true) {
 			this.status = true;
 			offsetX = gp.mouseH.mouseX - x;
-			offsetY = gp.mouseH.mouseY - y;
+			offsetY = gp.mouseH.mouseY - (int)y;
 		}
 		
 		
@@ -50,7 +50,7 @@ public class CountObject extends Crashable implements Drawable{
 	
 	@Override
 	public void draw(Graphics g) {
-		g.drawRect(x, y, width, height);
+		g.drawRect(x, (int)y, width, height);
 		
 	}
 	

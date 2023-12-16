@@ -35,6 +35,10 @@ public class KeyHandler implements KeyListener {
 		            }
 		            break;
 		        }
+		        case KeyEvent.VK_SPACE:{
+		        	gp.gameState = GamePanel.pauseState;
+		        	break;
+		        }
 	        }
         }
         else if(gp.gameState == GamePanel.mathState) {
@@ -62,8 +66,23 @@ public class KeyHandler implements KeyListener {
 //        			System.out.println("tap");
         			break;
         		}
+        		case KeyEvent.VK_ENTER:{
+        			MathState inp = (MathState) gp.ui.states[GamePanel.mathState];
+        			inp.button.state = Button.submitted;
+//        			System.out.println("tap");
+        			break;
+        		}
         	}
         }
+        else if(gp.gameState == GamePanel.pauseState) {
+       		switch(key) {
+	        	case KeyEvent.VK_SPACE:{
+		        	gp.gameState = GamePanel.playState;
+			      	break;
+			    }
+        	}
+        }
+        
 //	        case KeyEvent.VK_ESCAPE: {
 //	            if (gp.gameState == GamePanel.playState) gp.gameState = GamePanel.pauseState;
 //	            else if (gp.gameState == GamePanel.pauseState) gp.gameState = GamePanel.playState;

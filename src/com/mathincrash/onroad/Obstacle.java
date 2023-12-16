@@ -15,7 +15,6 @@ public class Obstacle extends Crashable implements Drawable{
 	private GamePanel gp;
 	
 	private Random random  = new Random();
-	float speedY = 2;
 	
 	public Obstacle(GamePanel gp) {
 		super(0, 0, gp.tileSize, gp.tileSize/2);
@@ -34,18 +33,20 @@ public class Obstacle extends Crashable implements Drawable{
 	@Override
 	public void update() {
 		y+=gp.speed;
+		y = (double)Math.round(y*1e3)/1e3;
+//		System.out.println("obs= "+gp.speed);
 		
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(new Color(0,0,0));
-		g.drawRect(x, y, width, height);
+		g.drawRect(x, (int)y, width, height);
 		
 	}
 	
 	public boolean onScreen() {
-		return this.y < gp.screenHeight;
+		return (int)this.y < gp.screenHeight;
 //		return this.y > 0 && this.y < gp.screenHeight;
 	}
 

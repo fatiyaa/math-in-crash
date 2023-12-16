@@ -45,7 +45,7 @@ public class Vehicle extends Crashable implements Drawable{
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(car, x, y, null);
+		g.drawImage(car, x, (int)y, null);
 	}
 	
 	public void goLeft(GamePanel gp) {

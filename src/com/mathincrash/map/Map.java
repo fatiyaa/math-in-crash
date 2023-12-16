@@ -16,7 +16,8 @@ public class Map implements Drawable {
     private Image RoadLImage;
     private Image RoadMImage;
     private Image RoadRImage;
-    private int tiles1, tiles7, tiles2, tiles6,tiles3,tiles4,tiles5, y;
+    private int tiles1, tiles7, tiles2, tiles6,tiles3,tiles4,tiles5;
+    private double y;
     private int tileSize;
     private int maxTileRow;
     private GamePanel gp;
@@ -50,21 +51,23 @@ public class Map implements Drawable {
     @Override
     public void update() {
         y += gp.speed;
-        if (y > -gp.speed) {
-            y = -tileSize;
+        y = (double)Math.round(y*1e3)/1e3;
+        if (Double.compare(y, -gp.speed)>=0) {
+            y = -(double)tileSize;
         }
+//        System.out.println("map= "+gp.speed);
     }
 
     @Override
     public void draw(Graphics g) {
         for (int i = 0; i <= maxTileRow; i++) {
-            g.drawImage(grassImage, tiles1, y + (tileSize * i), null);
-            g.drawImage(grassImage, tiles7, y + (tileSize * i), null);
-            g.drawImage(crossRoadImage, tiles2, y + (tileSize * i), null);
-            g.drawImage(crossRoadImage, tiles6, y + (tileSize * i), null);
-            g.drawImage(RoadLImage, tiles3, y + (tileSize * i), null);
-            g.drawImage(RoadMImage, tiles4, y + (tileSize * i), null);
-            g.drawImage(RoadRImage, tiles5, y + (tileSize * i), null);
+            g.drawImage(grassImage, tiles1, (int)y + (tileSize * i), null);
+            g.drawImage(grassImage, tiles7, (int)y + (tileSize * i), null);
+            g.drawImage(crossRoadImage, tiles2, (int)y + (tileSize * i), null);
+            g.drawImage(crossRoadImage, tiles6, (int)y + (tileSize * i), null);
+            g.drawImage(RoadLImage, tiles3, (int)y + (tileSize * i), null);
+            g.drawImage(RoadMImage, tiles4, (int)y + (tileSize * i), null);
+            g.drawImage(RoadRImage, tiles5, (int)y + (tileSize * i), null);
         }
     }
 
