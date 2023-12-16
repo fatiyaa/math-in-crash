@@ -37,9 +37,9 @@ public class PlayState extends State {
     }
 
     public void makeObstacle(int n) {
-        if (gp.obstacles.isEmpty()) {
-            gp.obstacles.add(new Obstacle(gp));
-        }
+//        if (gp.obstacles.isEmpty()) {
+//            gp.obstacles.add(new Obstacle(gp));
+//        }
         while (gp.obstacles.size() < n) {
             Obstacle ob = new Obstacle(gp, random.nextInt(-5, 0) * gp.tileSize * 5);
             boolean crash = false;
@@ -86,7 +86,7 @@ public class PlayState extends State {
         if (pauseButton.state == Button.submitted) {
             gp.sfx.play(Sound.sfxClick);
             gp.gameState = GamePanel.pauseState;
-            gp.bgm.playLoop(Sound.bgmGame);
+//            gp.bgm.playLoop(Sound.bgmGame);
         }
         boolean p = false;
         for (Iterator<Obstacle> i = gp.obstacles.iterator(); i.hasNext();) {
@@ -95,8 +95,10 @@ public class PlayState extends State {
             if (!obstacle.onScreen()) {
                 i.remove();
                 this.speedDouble += 0.05;
-                if((int)(this.speedDouble*10)%10 == 5)
+                if((int)(this.speedDouble*10)%10 == 5){
                 	gp.speed += 0.5;
+                	speedDouble+=0.05;
+                }
                 System.out.println(gp.speed);
             } else {
                 p = true;

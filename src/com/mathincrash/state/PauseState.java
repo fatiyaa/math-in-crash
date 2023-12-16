@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 import com.mathincrash.ui.Button;
 import com.mathincrash.ui.GamePanel;
-import com.mathincrash.ui.SoundButton;
 import com.mathincrash.util.Sound;
 
 public class PauseState extends State {
@@ -15,7 +14,8 @@ public class PauseState extends State {
     private Button resumeButton;
     private Button homeButton;
     private Button quitButton;
-    private SoundButton soundButton;
+    
+//    private SoundButton soundButton;
 
     private BufferedImage bg;
 
@@ -27,11 +27,9 @@ public class PauseState extends State {
         int y = 3*gp.tileSize;
         int yOffset = 3*height/2;
         
-        this.soundButton = new SoundButton(gp, x, y+yOffset/4);
         this.resumeButton = new Button(gp, "RESUME", x, y+=yOffset, width, height);
         this.homeButton = new Button(gp, "MAIN MENU", x, y+=yOffset, width, height);
         this.quitButton = new Button(gp, "QUIT", x, y+=yOffset, width, height);
-
 //        try {
 //            this.bg = ImageIO.read(getClass().getResourceAsStream("/state/menu/background.png"));
 //            BufferedImage resizedBg = new BufferedImage(gp.screenWidth, gp.screenHeight, bg.getType());
@@ -49,7 +47,7 @@ public class PauseState extends State {
         resumeButton.update();
         homeButton.update();
         quitButton.update();
-        soundButton.update();
+        gp.soundButton.update();
         if (resumeButton.state == Button.submitted){
             gp.sfx.play(Sound.sfxClick);
             gp.gameState = GamePanel.playState;
@@ -65,7 +63,7 @@ public class PauseState extends State {
             }
         	System.exit(0);
         }
-        if(soundButton.state == Button.submitted) {
+        if(gp.soundButton.state == Button.submitted) {
         	gp.sfx.play(Sound.sfxClick);
         }
     }
@@ -87,6 +85,6 @@ public class PauseState extends State {
         quitButton.draw(g);
         g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
         homeButton.draw(g);
-        soundButton.draw(g);
+        gp.soundButton.draw(g);
     }
 }

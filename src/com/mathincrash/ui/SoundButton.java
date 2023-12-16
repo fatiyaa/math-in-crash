@@ -17,10 +17,11 @@ public class SoundButton implements Drawable{
     
 	private GamePanel gp;
 	public int state;
-	private boolean active;
+	public boolean active;
 	private int x, y, width, height;
     private Color bgColor;
     private Color shaderColor;
+    
 	public SoundButton(GamePanel gp, int x, int y){
 		this.gp = gp;
 		this.x = x;
@@ -32,6 +33,7 @@ public class SoundButton implements Drawable{
         this.shaderColor = new Color(0, 0, 0, 0.25F);
         active = false;
 	}
+	
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
@@ -43,11 +45,13 @@ public class SoundButton implements Drawable{
 		 if (state == clicked && gp.mouseH.mouseReleased == true) {
 			 if(active == true) {
 				 active = false;
-				 System.out.println("on");
+				 gp.bgm.playLoop(Sound.bgmGame);
+//				 System.out.println("on");
 			 }
 			 else {
-				 System.out.println("off");
+//				 System.out.println("off");
 				 active = true;
+				 gp.bgm.stop();
 			 }
 			 this.state = submitted;
 		 }
@@ -62,31 +66,33 @@ public class SoundButton implements Drawable{
 		 g.setColor(shaderColor);
 	     g.drawRoundRect(x+2, y+2, width, height, 5, 5);
 	     
-	     if (state == normal) g.setColor(bgColor);
-	     else if (state == hovered) {
-	    	 if(active == true) {
-	    		g.setColor(Color.red);
-	    	 	g.drawLine(x, y, x+width, y+height);
-	    		g.setColor(bgColor.brighter());
-	    	 }
-	    	 else g.setColor(bgColor.darker());
+	     if(active && state == hovered) {
+	    	 g.setColor(bgColor.darker());
+//	    	 System.out.println("line");
 	     }
+	     else if(active) {
+	    	 g.setColor(bgColor.darker().darker());
+	     }
+	     else if (state == hovered) {
+	    	 g.setColor(bgColor.darker());
+	     }
+	     else if (state == normal) g.setColor(bgColor);
 	     else if (state == clicked) g.setColor(bgColor.darker().darker());
-	     else g.setColor(bgColor.darker().darker());
 	     g.fillRoundRect(x, y, width, height, 5, 5);
 	     
 	     g.setColor(Color.WHITE);
 	     g.drawRoundRect(x, y, width, height, 5, 5);
 	     if(active == true) {
-	    	 System.out.println("line");
 	    	 g.setColor(Color.red);
 	    	 Graphics2D g2 = (Graphics2D) g;
 	    	 g2.setStroke(new BasicStroke(3)); 
 	    	 g2.drawLine(x, y, x+width, y+height);
-	    	 gp.bgm.stop();
-	     }else {
-	    	 gp.bgm.playLoop(Sound.bgmGame);
+//	    	 gp.bgm.stop();
+//	    	 
 	     }
+//	     }else {
+//	    	 gp.bgm.playLoop(Sound.bgmGame);
+//	     }
 	     
 	}
 	

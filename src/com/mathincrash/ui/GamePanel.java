@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public UI ui;
 
 	public Map map;
+	public SoundButton soundButton;
 	public Sound bgm;
 	public Sound sfx;
 	public Point point;
@@ -54,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
 		this.sfx = new Sound();
 		this.buildGame();
 
+		this.soundButton = new SoundButton(this, (screenWidth-4*tileSize)/2, 3*tileSize+tileSize/4);
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 		this.keyH = new KeyHandler(this);
 		this.mouseH = new MouseHandler(this);
@@ -61,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
 		this.addMouseListener(mouseH);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+		bgm.playLoop(Sound.bgmGame);
 	}
 
 	public void buildGame() {
@@ -96,6 +99,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void update() {
 		this.ui.update();
+		if(this.soundButton.active) {
+			bgm.stop();
+			sfx.stop();
+		}
 	}
 
 	public void paintComponent(Graphics g) {
@@ -107,6 +114,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void reset() {
 		this.ui.reset();
+		bgm.playLoop(Sound.bgmGame);
 		this.gameState = titleState;
 	}
 }

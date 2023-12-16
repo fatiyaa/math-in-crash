@@ -60,7 +60,7 @@ public class Obstacle extends Crashable implements Drawable {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(new Color(0, 0, 0));
-		// g.drawRect(x, (int)y, width, height);
+//		 g.drawRect(x, (int)y, width, height);
 		g.drawImage(obstacleImage, x, (int) y, width, height, null);
 
 	}
