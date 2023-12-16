@@ -16,7 +16,7 @@ import com.mathincrash.util.Sound;
 public class GamePanel extends JPanel implements Runnable {
 
 	public final int tile = 32;
-	public final int scale = 2;
+	public final int scale = 3;
 	public final int tileSize = tile * scale;
 	public final int maxTileRow = 8;
 	public final int maxTileCol = 7;
