@@ -1,6 +1,9 @@
 package com.mathincrash.math;
 
 import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 import com.mathincrash.onroad.Crashable;
 import com.mathincrash.ui.Drawable;
@@ -12,6 +15,8 @@ public class CountObject extends Crashable implements Drawable{
 	float centerX, centerY;
 	public boolean status = true;
 	private int offsetX, offsetY;
+	private Image hole;
+	private Image bumps;
 	
 	public CountObject(GamePanel gp, int x, int y, int val) {
 		super(x, y, gp.tile, gp.tile);
@@ -19,6 +24,9 @@ public class CountObject extends Crashable implements Drawable{
 		this.val = val;
 		centerX = x+ width/2;
 		centerY = y+height/2;
+
+		this.hole = new ImageIcon("assets/math/Hole.png").getImage();
+		this.bumps = new ImageIcon("assets/math/BUmps.png").getImage();
 	}
 
 	@Override
@@ -49,9 +57,15 @@ public class CountObject extends Crashable implements Drawable{
 	}
 	
 	@Override
-	public void draw(Graphics g) {
-		g.drawRect(x, (int)y, width, height);
-		
+	public void draw(Graphics g) {		
+	}
+	
+	public void drawHole(Graphics g) {
+		g.drawImage(hole,x, (int)y, width, height, null);
+	}
+	
+	public void drawBumps(Graphics g) {
+		g.drawImage(bumps,x, (int)y, width, height, null);
 	}
 	
 

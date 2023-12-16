@@ -206,10 +206,13 @@ public class MathState extends State {
 		g.drawImage(background, gp.tileSize, gp.tileSize, null);
 		// g.drawRect(gp.tileSize, gp.tileSize, gp.tileSize*5, gp.tileSize*6);
 		for (CountObject co : leftSide) {
-			co.draw(g);
+			if (leftValue > 0) co.drawBumps(g);
+			else co.drawHole(g);
+			
 		}
 		for (CountObject co : rightSide) {
-			co.draw(g);
+			if (rightValue > 0) co.drawBumps(g);
+			else co.drawHole(g);
 		}
 		rightEval.draw(g);
 		leftEval.draw(g);
