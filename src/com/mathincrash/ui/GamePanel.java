@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public static final int mathState = 4;
 
 	public final int screenWidth = maxTileCol * tileSize;
-	public final int screenHeight = maxTileRow * tileSize;
+	public final int screenHeight= maxTileRow * tileSize;
 
 	public Thread thread;
 	public KeyHandler keyH;
@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public VolumeButton volumeButton;
 	public Sound bgm;
 	public Sound sfx;
+	public int theCar;
 	public Point point;
 	public Vehicle vehicle;
 	public ArrayList<Obstacle> obstacles;

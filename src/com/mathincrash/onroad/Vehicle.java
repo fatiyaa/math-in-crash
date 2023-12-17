@@ -15,15 +15,22 @@ public class Vehicle extends Crashable implements Drawable{
 	public static final int RIGHT = 3;
 	private int position;
 	private GamePanel gp;
-	private Image car;
+	private Image[] car;
+	public final int typeCar = 6;
 	
 	public Vehicle(GamePanel gp) {
 		super((gp.maxTileCol-1)/2* gp.tileSize, (gp.maxTileRow-1)*gp.tileSize, gp.tileSize, gp.tileSize);
 		this.gp = gp;
 		this.position = MID;
+		gp.theCar = 1;
 
-		String carPath = "assets/vehicle/Muscle.png";
-		this.car = new MakeImage(carPath,gp.tileSize,gp.tileSize).getImage();
+		car = new Image[typeCar];
+		car[0] = new MakeImage("assets/vehicle/Monster Truck.png",gp.tileSize,gp.tileSize).getImage();
+		car[1] = new MakeImage("assets/vehicle/Muscle1.png",gp.tileSize,gp.tileSize).getImage();
+		car[2] = new MakeImage("assets/vehicle/Taxi.png",gp.tileSize,gp.tileSize).getImage();
+		car[3] = new MakeImage("assets/vehicle/Roadster.png",gp.tileSize,gp.tileSize).getImage();
+		car[4] = new MakeImage("assets/vehicle/Police.png",gp.tileSize,gp.tileSize).getImage();
+		car[5] = new MakeImage("assets/vehicle/Ambulance.png",gp.tileSize,gp.tileSize).getImage();
 	}
 
 	@Override
@@ -45,7 +52,11 @@ public class Vehicle extends Crashable implements Drawable{
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(car, x, (int)y, null);
+		g.drawImage(car[gp.theCar], x, (int)y, null);
+	}
+
+	public void drawCar(Graphics g) {
+		g.drawImage(car[gp.theCar], 3 * gp.tileSize, gp.screenHeight/2 - 50 , null);
 	}
 	
 	public void goLeft(GamePanel gp) {
@@ -64,4 +75,17 @@ public class Vehicle extends Crashable implements Drawable{
 		}
 	}
 
+	public void carLeft(GamePanel gp) {
+		if (gp.theCar != 0) {
+			gp.theCar--;
+			gp.repaint();
+		}
+	}
+	
+	public void carRight(GamePanel gp) {
+		if (gp.theCar != typeCar-1) {
+			gp.theCar++;
+			gp.repaint();
+		}
+	}
 }
