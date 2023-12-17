@@ -24,7 +24,7 @@ public class Sound {
     private URL[] soundURL;
     FloatControl fc;
     private int currentVol, newVolume;
-    float dB = 3.0f;
+    float dB = 6.0f;
     
     private GamePanel gp;
     
@@ -84,12 +84,12 @@ public class Sound {
     }
     
     private void changedB() {
-    	if(newVolume == 0) {
+    	if(newVolume < 2) {
     		dB = -80;
     		return;
     	}
-    	dB = newVolume*43/100;
-    	dB -= 40;
+    	dB = newVolume*26/100;
+    	dB -= 20;
     }
     
 }

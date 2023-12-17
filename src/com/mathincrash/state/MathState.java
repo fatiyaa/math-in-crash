@@ -192,7 +192,9 @@ public class MathState extends State {
 				gp.gameState = GamePanel.playState;
 				gp.bgm.playLoop(Sound.bgmGame);
 
-			} else {
+			}else if(input.getAnswer() == 1000 ) {
+			}
+			else {
 				gp.gameState = GamePanel.endState;
 				gp.bgm.stop();
 				gp.sfx.play(Sound.sfxGameOver);

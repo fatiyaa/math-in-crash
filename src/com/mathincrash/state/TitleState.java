@@ -28,7 +28,7 @@ public class TitleState extends State {
         int width = 3*(gp.tileSize-10);
         int height = gp.tileSize-10;
         int x = (gp.screenWidth-width)/2;
-        int y = 13*gp.tileSize/4;
+        int y = 14*gp.tileSize/4;
         int yOffset = 3*height/2;
         
         this.playButton = new Button(gp, "PLAY", x, y+=yOffset, width, height);
